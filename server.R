@@ -16,10 +16,15 @@ function(input, output, session) {
                        choiceValues= nevek
                         )})
   
-  my_list <- reactive({
-    return(input$cryptos)
-  
+  my_list <- eventReactive(input$goButton, {
+    input$cryptos
   })
+  
+  # my_list <- reactive({
+  #   input$goButton
+  #   return(input$cryptos)
+  # 
+  # })
   
   my_list_2 <- reactive({
     return(sapply(strsplit(input$cryptos, "/"), "[[", 3))
@@ -34,6 +39,7 @@ function(input, output, session) {
   output$datatablem <- renderDataTable({my_data()})
   
    my_plot <- reactive({
+      
       tozsde_plot(number_of_days = input$integer, my_adatom = my_data(), list_of_markets =my_list_2() )
     })
   
