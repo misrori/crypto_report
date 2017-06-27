@@ -20,11 +20,7 @@ function(input, output, session) {
     input$cryptos
   })
   
-  # my_list <- reactive({
-  #   input$goButton
-  #   return(input$cryptos)
-  # 
-  # })
+
   
   my_list_2 <- reactive({
     return(sapply(strsplit(input$cryptos, "/"), "[[", 3))
