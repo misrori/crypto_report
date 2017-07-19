@@ -18,7 +18,6 @@ get_crypto_data <- function(crypto){
   }
 
   
-  adat <- adat_help[[1]][,c(1,5)]
   adat$Date <-gsub( 'Jan', '01',adat$Date)
   adat$Date <-gsub( 'Feb', '02',adat$Date)
   adat$Date <-gsub( 'Mar', '03',adat$Date)
