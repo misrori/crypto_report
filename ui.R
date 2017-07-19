@@ -20,7 +20,7 @@ navbarPage(
               uiOutput('valaszto')
              ),
              mainPanel(
-               withSpinner(plotlyOutput('summary_plot'),type = 4),
+               withSpinner(plotlyOutput('summary_plot', height = 720),type = 4),
                h2(textOutput('my_text'), align='center')
              )
            )
