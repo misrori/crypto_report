@@ -13,7 +13,7 @@ function(input, output, session) {
 
   output$valaszto <- renderUI({
     checkboxGroupInput("cryptos", "Válasz",choiceNames =nev_label, 
-                       choiceValues= nevek, selected = c('/currencies/bitcoin/', '/currencies/ethereum/', '/currencies/iota/')
+                       choiceValues= nevek, selected ="",
                         )})
   
   my_list <- eventReactive(input$goButton, {
@@ -22,7 +22,7 @@ function(input, output, session) {
   
 
   
-  my_list_2 <- reactive({
+  my_list_2 <- eventReactive(input$goButton, {
     return(sapply(strsplit(input$cryptos, "/"), "[[", 3))
     
   })
@@ -42,7 +42,18 @@ function(input, output, session) {
    output$summary_plot <- renderPlotly({
      my_plot()
    })
+   
+   my_reactive_text <- reactive({
+     if(nrow(my_data())==0){
+       return("")
+     }else{
+       return("The plot is interactive, select the area, that you are most interested in!")
+     }
+     
+     
+   })
   
+   output$my_text <- renderText(my_reactive_text())
   
   
 }
