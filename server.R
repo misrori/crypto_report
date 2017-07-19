@@ -13,7 +13,7 @@ function(input, output, session) {
 
   output$valaszto <- renderUI({
     checkboxGroupInput("cryptos", "Válasz",choiceNames =nev_label, 
-                       choiceValues= nevek
+                       choiceValues= nevek, selected = c('/currencies/bitcoin/', '/currencies/ethereum/', '/currencies/iota/')
                         )})
   
   my_list <- eventReactive(input$goButton, {

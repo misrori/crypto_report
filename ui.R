@@ -10,7 +10,7 @@ navbarPage(
   tabPanel("Elemzés",
            sidebarLayout(
              sidebarPanel(
-              sliderInput("integer", "Number of days before:", min=0, max=2000, value=50),
+              sliderInput("integer", "Number of days before:", min=0, max=2000, value=5),
               actionButton("goButton", "Go!"),
               uiOutput('valaszto')
              ),
