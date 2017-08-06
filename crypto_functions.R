@@ -11,7 +11,7 @@ get_crypto_data <- function(crypto){
     html_nodes("table") %>%
     html_table()
   if(nrow(adat_help[[1]])>0){
-    adat <- adat_help[[1]][,c(1,5)]
+    adat <- adat_help[[1]]
     
   }else{
     adat <- adat_help[[2]][,c(1,5)]
@@ -34,6 +34,9 @@ get_crypto_data <- function(crypto){
   
   adat$Date <- as.Date(gsub(',','',adat$Date), format = "%m %d %Y")
   setorder(adat,Date)
+  adat <- rbind(adat[1,],adat)
+  adat$Date[1] <- adat$Date[1]-1
+  adat$Close[1] <- adat$Open[1]
   return(adat)
 }
 
@@ -97,7 +100,7 @@ tozsde_plot <- function(number_of_days, my_adatom, list_of_markets){
     t = 150,
     pad = 4
   )
-  p<-plot_ly(adatom, x = ~Date, y = ~change, color =~ticker, text= paste(adatom$ticker,adatom$Close))%>%
+  p<-plot_ly(adatom, x = ~Date, y = ~change, color =~ticker, text= paste(adatom$ticker,' $',adatom$Close, sep = ''))%>%
     add_lines()%>%layout(title = paste('Started',min(adatom$Date)), xaxis = x, yaxis = y)
     
   return(p)
